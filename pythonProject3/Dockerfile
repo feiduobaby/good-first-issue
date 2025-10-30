@@ -1,0 +1,3 @@
+FROM python:3.13.5-slim-bookworm
+WORKDIR /code
+COPY pipeline_v2.bin .
