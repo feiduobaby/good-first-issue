@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}TODOs | Home{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Create a TODO</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label>
+            Title
+            {{ form.title }}
+            {{ form.title.errors }}
+        </label>
+        <label>
+            Description
+            {{ form.description }}
+            {{ form.description.errors }}
+        </label>
+        <label>
+            Due date
+            {{ form.due_date }}
+            {{ form.due_date.errors }}
+        </label>
+        <label>
+            Mark as resolved
+            {{ form.is_resolved }}
+            {{ form.is_resolved.errors }}
+        </label>
+        <button type="submit">Add TODO</button>
+    </form>
+</section>
+
+<section>
+    <h2>Pending</h2>
+    {% if pending_todos %}
+        <ul>
+            {% for todo in pending_todos %}
+                <li>
+                    <strong>{{ todo.title }}</strong>
+                    {% if todo.due_date %}- due {{ todo.due_date }}{% endif %}
+                    <form method="post" action="{% url 'todo_toggle' todo.pk %}" style="display:inline">{% csrf_token %}
+                        <button type="submit">Mark done</button>
+                    </form>
+                    <a href="{% url 'todo_edit' todo.pk %}">Edit</a>
+                    <form method="post" action="{% url 'todo_delete' todo.pk %}" style="display:inline">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nothing pending.</p>
+    {% endif %}
+</section>
+
+<section>
+    <h2>Completed</h2>
+    {% if completed_todos %}
+        <ul>
+            {% for todo in completed_todos %}
+                <li>
+                    <strong>{{ todo.title }}</strong>
+                    <form method="post" action="{% url 'todo_toggle' todo.pk %}" style="display:inline">{% csrf_token %}
+                        <button type="submit">Mark pending</button>
+                    </form>
+                    <a href="{% url 'todo_edit' todo.pk %}">Edit</a>
+                    <form method="post" action="{% url 'todo_delete' todo.pk %}" style="display:inline">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nothing completed yet.</p>
+    {% endif %}
+</section>
+{% endblock %}
+
