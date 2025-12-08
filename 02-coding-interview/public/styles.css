@@ -1,0 +1,104 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.header {
+  padding: 16px;
+  background: #111827;
+  border-bottom: 1px solid #1f2937;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+button,
+select {
+  border-radius: 6px;
+  border: 1px solid #1f2937;
+  padding: 8px 12px;
+  background: #1e293b;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+button:hover,
+select:hover {
+  background: #2d3648;
+}
+
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  padding: 12px;
+}
+
+.panel {
+  background: #0b1222;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#editor {
+  flex: 1;
+  min-height: 70vh;
+}
+
+.CodeMirror {
+  height: 100%;
+  font-size: 14px;
+  background: #0b1222;
+  color: #e2e8f0;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #1f2937;
+}
+
+#output {
+  margin: 0;
+  padding: 12px;
+  white-space: pre-wrap;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  color: #a5f3fc;
+  overflow-y: auto;
+  flex: 1;
+}
+
+#status {
+  font-size: 12px;
+  color: #a5b4fc;
+}
+
